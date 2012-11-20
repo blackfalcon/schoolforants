@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sass'
 require 'compass'
+require 'stipe'
 # require 'thin'  # Uncomment here and in Gemfile for better performance in production, especially on Heroku
 
 # If you're using bundler, you will need to add this
@@ -13,7 +14,23 @@ set :partial_template_engine, :erb
 
 helpers do
   include ERB::Util
-  alias_method :code, :html_escape  # For escaping and showing HTML code partials in the browser
+  alias_method :code, :html_escape
+  
+  # write better links
+  def link_to_unless_current(location, text )
+    if request.path_info == location
+      text
+    else
+      link_to location, text
+    end
+  end
+  
+  def link_to(url,text=url,opts={})
+    attributes = ""
+    opts.each { |key,value| attributes << key.to_s << "=\"" << value << "\" "}
+    "<a href=\"#{url}\" #{attributes}>#{text}</a>"
+  end
+
 end
 
 
@@ -37,4 +54,8 @@ end
 
 get '/' do
   erb :index
+end
+
+get '/toadstool' do
+  erb :"toadstool/grid", :layout => :"toadstool/layout"
 end

@@ -1,4 +1,5 @@
 # Require any additional compass plugins here.
+require 'stipe'
 
 # Set this to the root of your project when deployed:
 http_path = "/"
@@ -25,6 +26,6 @@ line_comments = false
 # and then run:
 # sass-convert -R --from scss --to sass sass scss && rm -rf sass && mv scss sass
 
-sass_options = {
-  :debug_info => true
-}
+# sass_options = {
+#   :debug_info => true
+# }
